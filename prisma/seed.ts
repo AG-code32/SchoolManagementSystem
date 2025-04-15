@@ -48,7 +48,7 @@ async function main() {
     const subjectId = (i % 10) + 1;
     const classId = (i % 6) + 1;
 
-    console.log(`Creando profesor con ID: teacher${i}`);
+    // console.log(`Creando profesor con ID: teacher${i}`);
 
     await prisma.teacher.create({
       data: {
@@ -203,7 +203,7 @@ async function main() {
     });
   }
 
-  console.log("✅ Seeding completado con éxito.");
+  // console.log("✅ Seeding completado con éxito.");
 }
 
 main()
