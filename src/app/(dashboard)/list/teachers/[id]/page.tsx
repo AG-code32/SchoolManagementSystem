@@ -64,7 +64,7 @@ const SingleTeacherPage = async ({
                   <FormContainer
                     table="teacher"
                     type="update"
-                    data={{ teacher }}
+                    data={ teacher }
                   />
                 )}
               </div>
