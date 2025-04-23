@@ -1,3 +1,5 @@
+// export const role = (sessionClaims?.metadata as { role?:string })?.role;
+
 const currentWorkWeek = () => {
     const today = new Date();
     const dayOfWeek = today.getDay();
@@ -26,11 +28,11 @@ export const adjustScheduleToCurrentWeek = (lesson: { title: string; start: Date
 
     return lesson.map(lesson => {
         const lessonDayOfWeek = lesson.start.getDay()
-        
+
         const daysFromMonday = lessonDayOfWeek === 0 ? 6 : lessonDayOfWeek - 1;
-        
+
         const adjustedStartDate = new Date(startOfWeek);
-        
+
         adjustedStartDate.setDate(startOfWeek.getDate() + daysFromMonday);
         adjustedStartDate.setHours(
             lesson.start.getHours(),
