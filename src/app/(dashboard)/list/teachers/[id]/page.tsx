@@ -1,4 +1,5 @@
 import Announcements from "@/components/Announcements";
+import BigCalendarContainer from "@/components/BigCalendarContainer";
 import BigCalendar from "@/components/BigCalender";
 import FormContainer from "@/components/forms/FormContainer";
 import Performance from "@/components/Performance";
@@ -14,6 +15,10 @@ const SingleTeacherPage = async ({
 }: {
   params: { id: string };
 }) => {
+
+  const { sessionClaims } = await auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+
   const teacher:
     | (Teacher & {
         _count: { subjects: number; lessons: number; classes: number };
@@ -34,9 +39,6 @@ const SingleTeacherPage = async ({
   if (!teacher) {
     return notFound();
   }
-
-  const { sessionClaims } = await auth();
-  const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
@@ -156,7 +158,7 @@ const SingleTeacherPage = async ({
         {/* BOTTOM */}
         <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
           <h1>Teacher&apos;s Schedule</h1>
-          <BigCalendar />
+          <BigCalendarContainer type="teacherId" id={teacher.id} />
         </div>
       </div>
       {/* RIGHT */}
