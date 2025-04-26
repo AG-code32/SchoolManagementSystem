@@ -5,16 +5,10 @@ import { useForm } from "react-hook-form";
 import InputField from "../InputField";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import {
-  studentSchema,
-  StudentSchema,
-} from "@/lib/formValidationSchemas";
+import { studentSchema, StudentSchema } from "@/lib/formValidationSchemas";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
-import {
-  createStudent,
-  updateStudent,
-} from "@/lib/actions";
+import { createStudent, updateStudent } from "@/lib/actions";
 import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";
 
@@ -29,6 +23,8 @@ const StudentForm = ({
   setOpen: Dispatch<SetStateAction<boolean>>;
   relatedData?: any;
 }) => {
+  console.log("relatedData recibido:", relatedData);
+  console.log("Parents:", relatedData?.parents);
   const {
     register,
     handleSubmit,
@@ -63,7 +59,7 @@ const StudentForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { grades, classes } = relatedData;
+  const { grades, classes, parents } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -165,13 +161,34 @@ const StudentForm = ({
           error={errors.birthday}
           type="date"
         />
-        <InputField
+        {/* <InputField
           label="Parent Id"
           name="parentId"
           defaultValue={data?.parentId}
           register={register}
           error={errors.parentId}
-        />
+        /> */}
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Parent Id</label>
+          <select
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            {...register("parentId")}
+            defaultValue={data?.parentId}
+          >
+            {parents.map(
+              (parent: { id: number; name: string; surname: string }) => (
+                <option value={parent.id} key={parent.id}>
+                  {parent.name} {parent.surname}
+                </option>
+              )
+            )}
+          </select>
+          {errors.parentId?.message && (
+            <p className="text-xs text-red-400">
+              {errors.parentId.message.toString()}
+            </p>
+          )}
+        </div>
         {data && (
           <InputField
             label="Id"
@@ -245,6 +262,7 @@ const StudentForm = ({
             </p>
           )}
         </div>
+        
       </div>
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>
