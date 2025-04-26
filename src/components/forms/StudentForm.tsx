@@ -8,16 +8,12 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   studentSchema,
   StudentSchema,
-  teacherSchema,
-  TeacherSchema,
 } from "@/lib/formValidationSchemas";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import {
   createStudent,
-  createTeacher,
   updateStudent,
-  updateTeacher,
 } from "@/lib/actions";
 import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";

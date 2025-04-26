@@ -3,6 +3,7 @@
 import {
   deleteClass,
   deleteExam,
+  deleteParent,
   deleteStudent,
   deleteSubject,
   deleteTeacher,
@@ -20,7 +21,7 @@ const deleteActionMap = {
   class: deleteClass,
   teacher: deleteTeacher,
   student: deleteStudent,
-  parent: deleteSubject,
+  parent: deleteParent,
   lesson: deleteSubject,
   exam: deleteExam,
   assignment: deleteSubject,
@@ -48,6 +49,9 @@ const ClassForm = dynamic(() => import("./forms/ClassForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const ParentForm = dynamic(() => import("./forms/ParentForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 
@@ -93,6 +97,14 @@ const forms: {
   ),
   exam: (setOpen, type, data, relatedData) => (
     <ExamForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  parent: (setOpen, type, data, relatedData) => (
+    <ParentForm
       type={type}
       data={data}
       setOpen={setOpen}
