@@ -279,7 +279,7 @@ export const createStudent = async (
       password: data.password,
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata: { role: "teacher" },
+      publicMetadata: { role: "student" },
     });
 
     await prisma.student.create({
@@ -322,7 +322,7 @@ export const updateStudent = async (
       ...(data.password !== "" && { password: data.password }),
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata: { role: "teacher" },
+      publicMetadata: { role: "student" },
     });
 
     await prisma.student.update({
@@ -501,7 +501,7 @@ export const createParent = async (
       password: data.password,
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata: { role: "teacher" },
+      // publicMetadata: { role: "teacher" },
     });
 
     await prisma.parent.create({
@@ -537,7 +537,7 @@ export const updateParent = async (
       ...(data.password !== "" && { password: data.password }),
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata: { role: "teacher" },
+      // publicMetadata: { role: "teacher" },
     });
 
     await prisma.parent.update({

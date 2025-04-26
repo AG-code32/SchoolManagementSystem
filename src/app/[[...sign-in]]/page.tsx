@@ -20,6 +20,14 @@ const Loginpage = () => {
     }
   }, [isSignedIn, isLoaded, user, router]);
 
+  if (!isLoaded) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+        <p className="text-gray-500">Cargando...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
       <SignIn.Root>
