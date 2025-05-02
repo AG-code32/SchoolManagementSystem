@@ -33,7 +33,7 @@ const StudentForm = ({
     resolver: zodResolver(studentSchema),
   });
 
-  const [img, setImg] = useState<any>();
+  const [img, setImg] = useState<any>(data?.img ? { secure_url: data.img } : null);
 
   const [state, formAction] = useFormState(
     type === "create" ? createStudent : updateStudent,
